@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tamweely.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Tamweely.Infrastructure.Data;
 namespace Tamweely.Infrastructure.Migrations
 {
     [DbContext(typeof(TamweelyDbContext))]
-    partial class TamweelyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251226162723_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

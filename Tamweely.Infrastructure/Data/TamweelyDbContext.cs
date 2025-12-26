@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Tamweely.Domain.Entities;
 
 namespace Tamweely.Infrastructure.Data;
 
-public class TamweelyDbContext(DbContextOptions<TamweelyDbContext> options): DbContext(options)
+public class TamweelyDbContext(DbContextOptions<TamweelyDbContext> options): IdentityDbContext<AppUser>(options)
 {
     public DbSet<Department> Departments { get; set; }
     public DbSet<JobTitle> JobTitles { get; set; }

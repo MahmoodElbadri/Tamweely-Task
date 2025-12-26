@@ -21,5 +21,6 @@ public static class InfrastructureCollectionExtensions
         services.AddScoped<IGenericRepository<Department>, GenericRepository<Department>>();
         services.AddScoped<IGenericRepository<JobTitle>, GenericRepository<JobTitle>>();
         services.AddScoped<IAddressBookService, AddressBookService>();
+        services.AddScoped<IAuthService, AuthService>();
     }
 }
