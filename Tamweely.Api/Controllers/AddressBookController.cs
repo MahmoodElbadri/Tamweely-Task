@@ -38,7 +38,7 @@ public class AddressBookController(IAddressBookService addressService) : Control
     }
 
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> UpdateAddressBook(int id, [FromForm]CreateAddressEntryDto addressBookDto)
+    public async Task<IActionResult> UpdateAddressBook(int id, [FromForm] CreateAddressEntryDto addressBookDto)
     {
         var entity = await addressService.UpdateAsync(id, addressBookDto);
         return Ok(entity);
@@ -49,6 +49,13 @@ public class AddressBookController(IAddressBookService addressService) : Control
     {
         await addressService.DeleteAsync(id);
         return NoContent();
+    }
+
+    [HttpGet("asExcel")]
+    public async Task<IActionResult> ExportToExcel(string? term, DateTime? from, DateTime? to)
+    {
+        var file = await addressService.ExportAsync(term, from, to);
+        return File(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "AddressBook.xlsx");
     }
 
 }

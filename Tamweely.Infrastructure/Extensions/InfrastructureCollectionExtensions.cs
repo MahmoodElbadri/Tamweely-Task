@@ -18,6 +18,8 @@ public static class InfrastructureCollectionExtensions
             oprions.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         });
         services.AddScoped<IGenericRepository<AddressEntry>, GenericRepository<AddressEntry>>();
+        services.AddScoped<IGenericRepository<Department>, GenericRepository<Department>>();
+        services.AddScoped<IGenericRepository<JobTitle>, GenericRepository<JobTitle>>();
         services.AddScoped<IAddressBookService, AddressBookService>();
     }
 }

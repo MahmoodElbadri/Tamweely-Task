@@ -14,4 +14,5 @@ public interface IAddressBookService
     Task DeleteAsync(int id);
     Task<AddressEntryDto> UpdateAsync(int id, CreateAddressEntryDto addressBook);
     Task<List<AddressEntryDto>> SearchAsync(string search, DateTime? fromDate, DateTime? toDate);
+    Task<MemoryStream> ExportAsync(string search, DateTime? fromDate, DateTime? toDate);
 }

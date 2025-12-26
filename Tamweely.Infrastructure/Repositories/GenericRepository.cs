@@ -22,6 +22,7 @@ public class GenericRepository<T>(TamweelyDbContext db) : IGenericRepository<T> 
         {
             db.Set<T>().Remove(entity);
             await db.SaveChangesAsync();
+            return;
         }
         throw new NotFoundException(typeof(T).Name, id.ToString());
     }
