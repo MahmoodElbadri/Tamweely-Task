@@ -36,4 +36,19 @@ public class AddressBookController(IAddressBookService addressService) : Control
         var addressBook = await addressService.AddAsync(addressBookDto);
         return CreatedAtAction(nameof(GetAddressBookById), new { id = addressBook.Id }, addressBook);
     }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateAddressBook(int id, [FromForm]CreateAddressEntryDto addressBookDto)
+    {
+        var entity = await addressService.UpdateAsync(id, addressBookDto);
+        return Ok(entity);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteAddressBook(int id)
+    {
+        await addressService.DeleteAsync(id);
+        return NoContent();
+    }
+
 }

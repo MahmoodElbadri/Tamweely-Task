@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Tamweely.Application.Interfaces;
+using Tamweely.Domain.Exceptions;
 using Tamweely.Infrastructure.Data;
 
 namespace Tamweely.Infrastructure.Repositories;
@@ -22,6 +23,7 @@ public class GenericRepository<T>(TamweelyDbContext db) : IGenericRepository<T> 
             db.Set<T>().Remove(entity);
             await db.SaveChangesAsync();
         }
+        throw new NotFoundException(typeof(T).Name, id.ToString());
     }
 
     public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> match, string[] includes = null)

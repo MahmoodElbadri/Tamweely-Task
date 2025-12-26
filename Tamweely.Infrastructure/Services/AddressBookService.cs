@@ -18,8 +18,8 @@ public class AddressBookService(IGenericRepository<AddressEntry> repo, IMapper m
             {
                 Directory.CreateDirectory(uploadsFolder); // يتأكد إن الفولدر موجود
             }
-
-            var fileName = $"{Guid.NewGuid()} {addressBook.Fullname} {Path.GetExtension(addressBook.Photo.FileName)}";
+            var fileName = addressBook.Photo.FileName.Trim();
+            fileName = $"{Guid.NewGuid()}{addressBook.Fullname}{Path.GetExtension(addressBook.Photo.FileName)}";
             var filePath = Path.Combine(uploadsFolder, fileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
