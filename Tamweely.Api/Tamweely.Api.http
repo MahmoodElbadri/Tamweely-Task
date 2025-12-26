@@ -1,0 +1,6 @@
+@Tamweely.Api_HostAddress = http://localhost:5299
+
+GET {{Tamweely.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

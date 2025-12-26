@@ -1,0 +1,39 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Tamweely.Application.DTOs;
+using Tamweely.Application.Interfaces;
+
+namespace Tamweely.Api.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class AddressBookController(IAddressBookService addressService) : ControllerBase
+{
+    [HttpGet]
+    public async Task<IActionResult> GetAllAddressBooks()
+    {
+        var addressBooks = await addressService.GetAllAsync();
+        return Ok(addressBooks);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetAddressBookById(int id)
+    {
+        var addressBook = await addressService.GetByIdAsync(id);
+        return Ok(addressBook);
+    }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> SearchAddressBook(string? term, DateTime? from, DateTime? to)
+    {
+        var addressBooks = await addressService.SearchAsync(term, from, to);
+        return Ok(addressBooks);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAddressBook([FromForm] CreateAddressEntryDto addressBookDto)
+    {
+        var addressBook = await addressService.AddAsync(addressBookDto);
+        return CreatedAtAction(nameof(GetAddressBookById), new { id = addressBook.Id }, addressBook);
+    }
+}

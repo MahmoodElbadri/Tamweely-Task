@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Tamweely.Api/Tamweely.Api.csproj" />
+  <Project Path="Tamweely.Application/Tamweely.Application.csproj" />
+  <Project Path="Tamweely.Domain/Tamweely.Domain.csproj" />
+  <Project Path="Tamweely.Infrastructure/Tamweely.Infrastructure.csproj" />
+</Solution>
