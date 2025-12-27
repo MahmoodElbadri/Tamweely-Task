@@ -23,6 +23,7 @@ public class AuthService(UserManager<AppUser> userManager, IConfiguration config
 
         return new AuthResponseDto
         {
+            Message = null,
             Username = user.FirstName + " " + user.LastName,
             Email = user.Email!,
             Token = token,
@@ -58,6 +59,7 @@ public class AuthService(UserManager<AppUser> userManager, IConfiguration config
         // For now, let's return success message
         return new AuthResponseDto
         {
+            Message = null,
             Email = user.Email,
             Username = model.FirstName + " " + model.LastName,
             Token = await CreateJwtToken(user), // Auto-login after register

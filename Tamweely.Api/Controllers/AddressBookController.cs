@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Tamweely.Application.DTOs;
 using Tamweely.Application.Interfaces;
 
 namespace Tamweely.Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/address-book")]
 [ApiController]
 public class AddressBookController(IAddressBookService addressService) : ControllerBase
 {
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAllAddressBooks()
     {
         var addressBooks = await addressService.GetAllAsync();
@@ -17,6 +19,7 @@ public class AddressBookController(IAddressBookService addressService) : Control
     }
 
     [HttpGet("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> GetAddressBookById(int id)
     {
         var addressBook = await addressService.GetByIdAsync(id);
@@ -24,6 +27,7 @@ public class AddressBookController(IAddressBookService addressService) : Control
     }
 
     [HttpGet("search")]
+    [Authorize]
     public async Task<IActionResult> SearchAddressBook(string? term, DateTime? from, DateTime? to)
     {
         var addressBooks = await addressService.SearchAsync(term, from, to);
@@ -31,6 +35,7 @@ public class AddressBookController(IAddressBookService addressService) : Control
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateAddressBook([FromForm] CreateAddressEntryDto addressBookDto)
     {
         var addressBook = await addressService.AddAsync(addressBookDto);
@@ -38,6 +43,7 @@ public class AddressBookController(IAddressBookService addressService) : Control
     }
 
     [HttpPut("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> UpdateAddressBook(int id, [FromForm] CreateAddressEntryDto addressBookDto)
     {
         var entity = await addressService.UpdateAsync(id, addressBookDto);
@@ -45,6 +51,7 @@ public class AddressBookController(IAddressBookService addressService) : Control
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> DeleteAddressBook(int id)
     {
         await addressService.DeleteAsync(id);
@@ -52,6 +59,7 @@ public class AddressBookController(IAddressBookService addressService) : Control
     }
 
     [HttpGet("asExcel")]
+    [Authorize]
     public async Task<IActionResult> ExportToExcel(string? term, DateTime? from, DateTime? to)
     {
         var file = await addressService.ExportAsync(term, from, to);
